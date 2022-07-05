@@ -1,10 +1,17 @@
+"""
+sudo docker pull codait/max-text-summarizer
+
+sudo docker run -it -p 5000:5000 quay.io/codait/max-text-summarizer
+
+"""
+
 import requests
 
 #------------test de base---------
 url_base="http://0.0.0.0:5000/model/metadata"
 results = requests.get(url=url_base)
 
-
+#------------Fonction qui fabrique le résumé-------------
 def summarize(text):
     """ Fonction qui prend un texte en entrée (string)
         renvoie un resume (string)
@@ -18,10 +25,12 @@ def summarize(text):
     resume=' '.join(reponse)
     print(resume)
 
+#-----------Lecture d'un texte--------------------------
 with open('text_long.txt') as f:
     contents = f.readlines()
     texte=contents[0]
 
+#-----------Appel de la fonction crée-----------------------
 summarize(texte)
 
 
