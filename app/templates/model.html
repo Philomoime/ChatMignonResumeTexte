@@ -26,12 +26,15 @@
 
 <p>
     Entrez votre texte:
-    <form action="/form" method="post">
+    <form action="/model" method="post">
         Texte: <input type="text" name="texte">  <br />
-        <input type="submit" name= "form" value="Submit" />
+        Nom: <input type="text" name="nom">  <br />
+        Mail: <input type="text" name="mail" /> <br />
+        Téléphone (optionel): <input type="text" name="tel" /> <br />
+        <input type="submit" value="Submit" />
     </form>
 </p>
 <p>
-Votre résumé ici:
+Votre résumé ici: {{ variable }}
 </p>
 
