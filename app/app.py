@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request
-from BDD.bdd import add_entry_bdd,read_all_bdd, init_bdd
+from BDD.bdd import add_entry_bdd,read_all_bdd, Message, init_bdd
 from moteur.moteur import summarize
 
-init_bdd()
+session = init_bdd()
+# print('youpi')
 
 app = Flask(__name__)
 
@@ -34,8 +35,8 @@ def model():
         "Call AI"
         resume = summarize(texte)
         "Fill bdd"
-        add_entry_bdd(nom=nom, mail=mail, tel=tel, texte=texte, resume=resume)
-        read_all_bdd()
+        add_entry_bdd(session=session, nom=nom, mail=mail, tel=tel, texte=texte, resume=resume)
+        read_all_bdd(session)
         return render_template("model.html", variable=resume)
 
 # '''un joli formulaire de contact (nom, mail, téléphone (optionnel), message)'''
@@ -53,10 +54,10 @@ def contact():
         mail = request.form["mail"]
         tel = request.form["tel"]
         message = request.form["message"]
-        print(nom, mail, tel, message)
+        # print(nom, mail, tel, message)
         "Fill bdd"
-        add_entry_bdd(nom=nom, mail=mail, tel=tel, message=message)
-        read_all_bdd()
+        add_entry_bdd(session=session, nom=nom, mail=mail, tel=tel, message=message)
+        read_all_bdd(session)
         return render_template("contacted.html")
     
 

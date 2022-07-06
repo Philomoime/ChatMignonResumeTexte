@@ -1,7 +1,7 @@
 """
 sudo docker pull codait/max-text-summarizer
 
-sudo docker run -it -p 5000:5000 quay.io/codait/max-text-summarizer
+sudo docker run -it -d -p 5001:5000 quay.io/codait/max-text-summarizer
 
 """
 
@@ -22,6 +22,7 @@ def summarize(text):
     header={"accept": "application/json"}
     results_text= requests.post(url=url_post, headers=header, json=json_data)
     reponse=results_text.json()['summary_text']
+    # print(reponse)
     resume=' '.join(reponse)
     return resume 
 
