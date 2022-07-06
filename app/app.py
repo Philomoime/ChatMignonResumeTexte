@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
-from BDD.bdd import add_entry_bdd,read_all_bdd
+from BDD.bdd import add_entry_bdd,read_all_bdd, init_bdd
 from moteur.moteur import summarize
+
+init_bdd()
 
 app = Flask(__name__)
 
