@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
-from BDD.bdd import add_entry_bdd,read_all_bdd, Message, init_bdd
-from moteur.moteur import summarize
+from app.BDD.bdd import add_entry_bdd,read_all_bdd, Message, init_bdd
+from app.moteur.moteur import summarize
 
 session = init_bdd()
 # print('youpi')
@@ -67,4 +67,10 @@ formulaire s’est effectuée de manière réussie'''
 def contacted():
     return render_template("contacted.html")
 
-app.run()
+app.run(debug=True, host='0.0.0.0')
+
+def main():
+    pass
+
+if __name__ == "__main__":
+    main()
