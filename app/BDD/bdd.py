@@ -31,7 +31,7 @@ class Message(Base):
 
 
 def init_bdd():
-    Base = declarative_base()
+    # Base = declarative_base()
     # Postgres username, password, and database name
     POSTGRES_ADDRESS = 'db' ## INSERT YOUR DB ADDRESS IF IT'S NOT ON PANOPLY
     POSTGRES_PORT = '5432'
