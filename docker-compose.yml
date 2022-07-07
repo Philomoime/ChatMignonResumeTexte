@@ -2,8 +2,20 @@ version: "3.7.4"
 services:
   app:
     build: .
+    image: "docker_cutecat"
     ports:
-      - "8000:5000"
-  bdd:
-    image: "redis:alpine"
+      - "5000:5000"
+  db:
+    image: "postgres"
+    restart: always
+    volumes:
+      - "./BDD/:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+    environnement:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: admin
   moteur:
+    image: "quay.io/codait/max-text-summarizer"
+    ports:
+      - "5001:5000"
