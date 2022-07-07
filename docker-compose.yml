@@ -1,21 +1,27 @@
 version: "3.7.4"
 services:
-  app:
-    build: .
-    image: "docker_cutecat"
-    ports:
-      - "5000:5000"
   db:
-    image: "postgres"
+    image: postgres
     restart: always
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=admin
+    # ports:
+    #   - "5432:5432"
     volumes:
       - "./BDD/:/var/lib/postgresql/data"
-    ports:
-      - "5432:5432"
-    environnement:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: admin
+    expose:
+      - 5432
   moteur:
-    image: "quay.io/codait/max-text-summarizer"
+    image: quay.io/codait/max-text-summarizer
+    # ports:
+    #   - "5001:5000"
+  app:
+    build: .
+    links:
+      - db
+      - moteur 
     ports:
-      - "5001:5000"
+      - "5000:5000"
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t

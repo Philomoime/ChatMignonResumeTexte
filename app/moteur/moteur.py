@@ -8,7 +8,7 @@ sudo docker run -it -d -p 5001:5000 quay.io/codait/max-text-summarizer
 import requests
 
 #------------test de base---------
-url_base="http://0.0.0.0:5001/model/metadata"
+url_base="http://moteur:5000/model/metadata"
 results = requests.get(url=url_base)
 
 #------------Fonction qui fabrique le résumé-------------
@@ -17,7 +17,7 @@ def summarize(text):
         renvoie un resume (string)
     """
     text_input= [text, ]
-    url_post="http://0.0.0.0:5001/model/predict"
+    url_post="http://moteur:5000/model/predict"
     json_data= {"text":text_input}
     header={"accept": "application/json"}
     results_text= requests.post(url=url_post, headers=header, json=json_data)

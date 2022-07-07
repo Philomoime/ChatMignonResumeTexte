@@ -33,7 +33,7 @@ class Message(Base):
 def init_bdd():
     Base = declarative_base()
     # Postgres username, password, and database name
-    POSTGRES_ADDRESS = '0.0.0.0' ## INSERT YOUR DB ADDRESS IF IT'S NOT ON PANOPLY
+    POSTGRES_ADDRESS = 'db' ## INSERT YOUR DB ADDRESS IF IT'S NOT ON PANOPLY
     POSTGRES_PORT = '5432'
     POSTGRES_USERNAME = 'admin'
     POSTGRES_PASSWORD = 'password'
@@ -57,8 +57,9 @@ def init_bdd():
     # Vérification de l'existence de la base de donnée
     if not sqlalchemy.inspect(db).has_table('Message'):
         Base.metadata.create_all(db)
+        session.commit()
 
-    print('truc')
+    # print('truc')
 
     return session
 
